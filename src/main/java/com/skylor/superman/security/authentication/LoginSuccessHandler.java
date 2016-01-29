@@ -12,8 +12,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
+import com.skylor.superman.security.token.SuperToken;
+
 /**
- * @author Eric
+ * @author skylor
  */
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -31,6 +33,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
 
+        SuperToken token = (SuperToken)authentication;
+        String loginFrom = token.getLoginFrom();
     }
 
 

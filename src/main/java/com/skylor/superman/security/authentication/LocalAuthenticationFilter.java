@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import com.skylor.superman.security.token.LocalToken;
 
 /**
- * @author Eric
+ * @author skylor
  */
 public class LocalAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
