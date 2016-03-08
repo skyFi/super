@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mangofactory.swagger.annotations.ApiIgnore;
 import com.skylor.superman.model.User;
+import com.wordnik.swagger.annotations.ApiOperation;
 
-import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
-import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author skylor on 2016/3/8.
