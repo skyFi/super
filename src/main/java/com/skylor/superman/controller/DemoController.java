@@ -64,7 +64,7 @@ public class DemoController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getusernameById", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUserNameById", method = RequestMethod.GET)
     @ApiOperation(value = "获取用户姓名", notes = "获取用户姓名")
     public String getUserNameById(
             @RequestParam("id") Long id) {
