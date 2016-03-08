@@ -9,10 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.skylor.superman.model.Demo;
+import com.skylor.superman.model.User;
 
 import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONException;
@@ -36,6 +38,9 @@ import springfox.documentation.annotations.ApiIgnore;
 public class DemoController {
 
     private Logger logger = LoggerFactory.getLogger(DemoController.class);
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     /**
      * 可以直接使用@ResponseBody响应JSON
@@ -59,10 +64,13 @@ public class DemoController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getusername", method = RequestMethod.GET)
+    @RequestMapping(value = "/getusernameById", method = RequestMethod.GET)
     @ApiOperation(value = "获取用户姓名", notes = "获取用户姓名")
-    public String getUserName() {
-        return "skylor";
+    public String getUserNameById(
+            @RequestParam("id") Long id) {
+
+        String sql = "select username from user where id = ?;";
+        return jdbcTemplate.queryForObject(sql, String.class, id);
     }
 
     /**
@@ -105,16 +113,17 @@ public class DemoController {
      * JSON请求一个对象<br/>
      * （Ajax Post Data：{"name":"名称","content":"内容"}）
      *
-     * @param demo
+     * @param user
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = "/jsonTest2", method = RequestMethod.POST)
-    public ModelMap jsonTest2(@RequestBody Demo demo) {
-        logger.info("demoName：" + demo.getName());
-        logger.info("demoContent：" + demo.getContent());
+    @RequestMapping(value = "/jsonTest2User", method = RequestMethod.POST)
+    public ModelMap jsonTest2(@RequestBody User user) {
+        logger.info("username：" + user.getUsername());
+        logger.info("password：" + user.getPassword());
         ModelMap map = new ModelMap();
-        map.addAttribute("result", "ok");
+        map.addAttribute("username", user.getUsername());
+        map.addAttribute("password", user.getPassword());
         return map;
     }
 
@@ -166,18 +175,18 @@ public class DemoController {
     /**
      * 输入 和输出为JSON格式的数据的方式 HttpEntity<?> ResponseEntity<?>
      *
-     * @param demo
+     * @param user
      * @return
      */
     @ResponseBody
     @RequestMapping(value = "/jsonTest4", method = RequestMethod.POST)
-    public ResponseEntity<String> jsonTest4(HttpEntity<Demo> demo,
+    public ResponseEntity<String> jsonTest4(HttpEntity<User> user,
                                             HttpServletRequest request, HttpSession session) {
         //获取Headers方法
-        HttpHeaders headers = demo.getHeaders();
+        HttpHeaders headers = user.getHeaders();
 
         // 获取内容
-        String demoContent = demo.getBody().getContent();
+        String demoContent = user.getBody().getUsername();
 
         // 这里直接new一个对象（HttpHeaders headers = new HttpHeaders();）
         HttpHeaders responseHeaders = new HttpHeaders();
