@@ -16,12 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mangofactory.swagger.annotations.ApiIgnore;
-import com.wordnik.swagger.annotations.ApiOperation;
-
-import net.sf.json.JSONException;
-import net.sf.json.JSONObject;
-
 //import com.skylor.superman.model.User;
 
 /**
@@ -43,7 +37,6 @@ public class DemoController {
      */
     @ResponseBody
     @RequestMapping(value = "/getcount", method = RequestMethod.GET)
-    @ApiOperation(value="测试-getCount", notes="getCount更多说明")
     public ModelMap getCount() {
         logger.info(">>>>>>>> begin getCount >>>>>>>>");
         ModelMap map = new ModelMap();
@@ -71,7 +64,6 @@ public class DemoController {
      * @param response
      * @return
      */
-    @ApiIgnore//使用该注解忽略这个API
     @ResponseBody
     @RequestMapping(value = "/jsonTest1", method = RequestMethod.POST)
     public ModelMap jsonTest(HttpServletRequest request,
@@ -153,15 +145,15 @@ public class DemoController {
      * @param jsonObject
      * @return
      */
-    @ResponseBody
-    @RequestMapping(value = "/jsonTest5", method = RequestMethod.POST)
-    public ModelMap jsonTest5(@RequestBody JSONObject jsonObject) throws JSONException {
-        String name = jsonObject.getString("name");
-        logger.info("demoName：" + name);
-        ModelMap map = new ModelMap();
-        map.addAttribute("demoName",name);
-        return map;
-    }
+//    @ResponseBody
+//    @RequestMapping(value = "/jsonTest5", method = RequestMethod.POST)
+//    public ModelMap jsonTest5(@RequestBody JSONObject jsonObject) throws JSONException {
+//        String name = jsonObject.getString("name");
+//        logger.info("demoName：" + name);
+//        ModelMap map = new ModelMap();
+//        map.addAttribute("demoName",name);
+//        return map;
+//    }
 
     /**
      * 输入 和输出为JSON格式的数据的方式 HttpEntity<?> ResponseEntity<?>
