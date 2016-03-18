@@ -31,4 +31,11 @@ public class TestController {
     public String getName(@RequestParam(name = "name") String stuName) {
         return "hello " + stuName + " nice to meet you! 天王盖地虎";
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getImgUrl", method = RequestMethod.GET)
+    public String getImgUrl(@RequestParam(name = "name") String imgNum) {
+        return "/lib/img/" + imgNum + ".jpg";
+    }
+
 }
