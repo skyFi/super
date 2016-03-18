@@ -14,15 +14,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
 
     @ResponseBody
-    @RequestMapping(value = "/show", method= RequestMethod.POST)
+    @RequestMapping(value = "/show", method = RequestMethod.POST)
     public String show(
-            @RequestParam(name = "name") String stuName){
+            @RequestParam(name = "name") String stuName) {
         return "hello " + stuName + ", nice to meet you!";
     }
 
     @ResponseBody
-    @RequestMapping(value = "/getName", method= RequestMethod.GET)
-    public String getName(){
+    @RequestMapping(value = "/getName", method = RequestMethod.GET)
+    public String getName() {
         return "hello boy, nice to meet you!";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getCustomName", method = RequestMethod.GET)
+    public String getName(@RequestParam(name = "name") String stuName) {
+        return "hello " + stuName + " nice to meet you! 天王盖地虎";
     }
 }
