@@ -21,7 +21,7 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/show", method= RequestMethod.GET)
+    @RequestMapping(value = "/getName", method= RequestMethod.GET)
     public String getName(){
         return "hello boy, nice to meet you!";
     }
