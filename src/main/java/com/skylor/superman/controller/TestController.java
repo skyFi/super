@@ -17,6 +17,12 @@ public class TestController {
     @RequestMapping(value = "/show", method= RequestMethod.POST)
     public String show(
             @RequestParam(name = "name") String stuName){
-        return stuName;
+        return "hello " + stuName + ", nice to meet you!";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/show", method= RequestMethod.GET)
+    public String getName(){
+        return "hello boy, nice to meet you!";
     }
 }
