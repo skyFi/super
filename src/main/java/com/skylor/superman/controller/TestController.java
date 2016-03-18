@@ -34,8 +34,8 @@ public class TestController {
 
     @ResponseBody
     @RequestMapping(value = "/getImgUrl", method = RequestMethod.GET)
-    public String getImgUrl(@RequestParam(name = "name") String imgNum) {
-        return "/lib/img/" + imgNum + ".jpg";
+    public String getImgUrl(@RequestParam(name = "num") String imgNum) {
+        return "redirect:/lib/img/" + imgNum + ".jpg";
     }
 
 }
